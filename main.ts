@@ -1,9 +1,19 @@
+/**
+ * accel is a percentage of power to motor
+ */
+/**
+ * steer is a ratio(0 to 1)
+ * 
+ * of motor powers
+ */
 function rblink (真偽値: boolean) {
 	
 }
 let tracking = 0
 let out = 0
 cuteBot.singleheadlights(cuteBot.RGBLights.RGB_R, 255, 0, 0)
+let accel = 50
+let steer = 0.8
 basic.forever(function () {
     if (out == 0) {
         if (tracking < 0) {
