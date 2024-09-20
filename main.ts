@@ -9,8 +9,10 @@
 function steer2 (left: boolean) {
     if (left) {
         cuteBot.motors(accel, steer * accel)
+        basic.pause(100)
     } else {
         cuteBot.motors(steer * accel, accel)
+        basic.pause(100)
     }
 }
 let tracking = 0
@@ -49,6 +51,7 @@ loops.everyInterval(200, function () {
         out = 0
     }
     if (cuteBot.tracking(cuteBot.TrackingState.L_unline_R_line)) {
+        steer2(true)
         tracking = -1
         out = 0
     }
