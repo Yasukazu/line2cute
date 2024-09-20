@@ -6,14 +6,20 @@
  * 
  * of motor powers
  */
-function rblink (真偽値: boolean) {
-	
+function steer2 (left: boolean) {
+    if (left) {
+        cuteBot.motors(accel, steer * accel)
+    } else {
+        cuteBot.motors(steer * accel, accel)
+    }
 }
 let tracking = 0
 let out = 0
+let steer = 0
+let accel = 0
 cuteBot.singleheadlights(cuteBot.RGBLights.RGB_R, 255, 0, 0)
-let accel = 50
-let steer = 0.8
+accel = 50
+steer = 0.8
 basic.forever(function () {
     if (out == 0) {
         if (tracking < 0) {
