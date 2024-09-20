@@ -1,18 +1,14 @@
 /**
  * accel is a percentage of power to motor
  */
-/**
- * steer is a ratio(0 to 1)
- * 
- * of motor powers
- */
+// steer is a ratio(0 to 1)
+// 
+// of motor powers
 function steer2 (left: boolean) {
     if (left) {
         cuteBot.motors(accel, steer * accel)
-        basic.pause(100)
     } else {
         cuteBot.motors(steer * accel, accel)
-        basic.pause(100)
     }
 }
 let tracking = 0
@@ -26,40 +22,33 @@ basic.forever(function () {
     if (out == 0) {
         if (tracking < 0) {
             cuteBot.motors(50, 30)
+        } else if (tracking > 0) {
+            cuteBot.motors(30, 50)
         } else {
-            if (tracking > 0) {
-                cuteBot.motors(30, 50)
-            } else {
-                cuteBot.motors(50, 50)
-            }
+            cuteBot.motors(50, 50)
         }
+    } else if (tracking > 0) {
+        cuteBot.motors(50, 30)
+    } else if (tracking < 0) {
+        cuteBot.motors(30, 50)
     } else {
-        if (tracking > 0) {
-            cuteBot.motors(50, 30)
-        } else {
-            if (tracking < 0) {
-                cuteBot.motors(30, 50)
-            } else {
-                cuteBot.motors(50, 50)
-            }
-        }
+        cuteBot.motors(50, 50)
     }
 })
 loops.everyInterval(200, function () {
     if (cuteBot.tracking(cuteBot.TrackingState.L_R_line)) {
         tracking = 0
         out = 0
-    }
-    if (cuteBot.tracking(cuteBot.TrackingState.L_unline_R_line)) {
+    } else if (cuteBot.tracking(cuteBot.TrackingState.L_unline_R_line)) {
         steer2(true)
         tracking = -1
         out = 0
-    }
-    if (cuteBot.tracking(cuteBot.TrackingState.L_line_R_unline)) {
+    } else if (cuteBot.tracking(cuteBot.TrackingState.L_line_R_unline)) {
+        steer2(false)
         tracking = 1
         out = 0
-    }
-    if (cuteBot.tracking(cuteBot.TrackingState.L_R_unline)) {
+    } else {
+        // cuteBot.tracking(cuteBot.TrackingState.L_R_UNLINE):
         out = 1
     }
 })
