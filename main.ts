@@ -23,6 +23,7 @@ steer = 0.8
 cuteBot.singleheadlights(cuteBot.RGBLights.ALL, 0, 0, 0)
 loops.everyInterval(200, function () {
     if (cuteBot.tracking(cuteBot.TrackingState.L_R_line)) {
+        steer2(N_TURN)
         tracking = 0
         out = 0
     } else if (cuteBot.tracking(cuteBot.TrackingState.L_unline_R_line)) {
@@ -34,7 +35,6 @@ loops.everyInterval(200, function () {
         tracking = 1
         out = 0
     } else {
-        steer2(N_TURN)
         // cuteBot.tracking(cuteBot.TrackingState.L_R_UNLINE):
         out = 1
     }
